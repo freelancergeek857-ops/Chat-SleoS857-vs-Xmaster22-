@@ -1,5 +1,5 @@
 // Configuración de tu cliente Supabase
-const SUPABASE_URL = "TU_SUPABASE_URL";
+const SUPABASE_URL = "https://arpmtbhiynrsffapebyw.supabase.co";
 const SUPABASE_KEY = "TU_SUPABASE_ANON_KEY";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
