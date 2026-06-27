@@ -2,9 +2,8 @@
 const SUPABASE_URL = "https://arpmtbhiynrsffapebyw.supabase.co";
 const SUPABASE_KEY = "sb_publishable_9IFETTvqOGXF11G0YNdCog_mgjkav6Z";
 
-// Inicialización corregida para evitar colisiones en el navegador
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const supabase = supabaseClient;
+// Usamos un nombre completamente único (chatDb) para evitar conflictos con la librería
+const chatDb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const ventanaChat = document.getElementById('ventana-chat');
 const formChat = document.getElementById('form-chat');
@@ -13,7 +12,7 @@ const inputUsuario = document.getElementById('input-usuario');
 
 // 1. Cargar el historial existente al entrar a la URL
 async function cargarHistorial() {
-    const { data, error } = await supabase
+    const { data, error } = await chatDb
         .from('mensajes')
         .select('*')
         .order('created_at', { ascending: true });
@@ -55,7 +54,7 @@ formChat.addEventListener('submit', async (e) => {
 
     if (!mensaje) return;
 
-    const { error } = await supabase
+    const { error } = await chatDb
         .from('mensajes')
         .insert([{ usuario: usuario, contenido: mensaje }]);
 
@@ -68,7 +67,7 @@ formChat.addEventListener('submit', async (e) => {
 });
 
 // 4. ESCUCHAR EN TIEMPO REAL (Uso correcto de 'schema')
-supabase
+chatDb
     .channel('cambios-chat')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'mensajes' }, payload => {
         renderizarMensaje(payload.new);
