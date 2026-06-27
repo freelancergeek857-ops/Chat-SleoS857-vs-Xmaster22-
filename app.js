@@ -1,7 +1,7 @@
 // Configuración de tu cliente Supabase
 const SUPABASE_URL = "https://arpmtbhiynrsffapebyw.supabase.co";
 const SUPABASE_KEY = "sb_publishable_9IFETTvqOGXF11G0YNdCog_mgjkav6Z";
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const ventanaChat = document.getElementById('ventana-chat');
 const formChat = document.getElementById('form-chat');
@@ -59,7 +59,7 @@ formChat.addEventListener('submit', async (e) => {
 // 4. ESCUCHAR EN TIEMPO REAL (Magia de Supabase)
 supabase
     .channel('cambios-chat')
-    .on('postgres_changes', { event: 'INSERT', scheme: 'public', table: 'mensajes' }, payload => {
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'mensajes' }, payload => {
         renderizarMensaje(payload.new);
         hacerScrollAbajo();
     })
