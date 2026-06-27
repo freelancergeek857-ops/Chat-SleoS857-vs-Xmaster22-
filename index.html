@@ -2,30 +2,31 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Chat Express</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    /* Forzar que no haya scroll general en la pantalla bajo ningún concepto */
-    html, body {
-      overflow: hidden;
+    /* Forzar el contenedor base a la altura exacta visible del dispositivo */
+    body {
+      height: 100vh;
+      height: 100dvh;
       margin: 0;
       padding: 0;
-      height: 100vh;
-      height: 100dvh; /* Altura dinámica para navegadores móviles */
-      touch-action: none;
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
     }
   </style>
 </head>
-<body class="bg-gray-900 text-gray-100 flex flex-col md:flex-row p-2 sm:p-4 gap-2 sm:gap-4 h-full overflow-hidden w-full select-none">
+<body class="bg-gray-900 text-gray-100 p-2 flex flex-col md:flex-row gap-2 select-none box-border">
 
-  <div class="flex-1 bg-gray-800 rounded-lg flex flex-col shadow-lg overflow-hidden min-h-0 order-1 md:order-2">
+  <div class="flex-1 bg-gray-800 rounded-lg flex flex-col overflow-hidden min-h-0 order-1 md:order-2 shadow-lg">
     
     <div id="ventana-chat" class="flex-1 p-3 overflow-y-auto space-y-3 flex flex-col min-h-0 text-xs sm:text-sm">
       </div>
 
-    <form id="form-chat" class="p-3 bg-gray-750 border-t border-gray-700 flex gap-2 items-center shrink-0">
+    <form id="form-chat" class="p-2 sm:p-3 bg-gray-750 border-t border-gray-700 flex gap-2 items-center shrink-0">
       <input type="text" id="input-mensaje" placeholder="Escribí un mensaje... 😊" required autocomplete="off"
              class="flex-1 bg-gray-700 border border-gray-600 rounded px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-emerald-500">
       <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded text-xs sm:text-sm transition-colors shrink-0">
@@ -35,19 +36,19 @@
 
   </div>
 
-  <div class="w-full md:w-1/4 bg-gray-800 rounded-lg p-3 flex flex-row md:flex-col justify-between items-center md:items-stretch shadow-lg gap-2 order-2 md:order-1 shrink-0">
+  <div class="w-full md:w-1/4 bg-gray-800 rounded-lg p-2 sm:p-3 flex flex-row md:flex-col justify-between items-center md:items-stretch shrink-0 order-2 md:order-1 gap-2 shadow-md">
     
-    <div class="flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0 w-full">
-      <h2 class="text-xs sm:text-sm md:text-xl font-bold md:mb-4 text-emerald-400 whitespace-nowrap">Configuración</h2>
+    <div class="flex flex-row md:flex-col items-center md:items-start gap-2 md:gap-0 w-full">
+      <h2 class="text-xs sm:text-sm md:text-lg font-bold md:mb-2 text-emerald-400 whitespace-nowrap">Configuración</h2>
       
       <div class="flex items-center md:block gap-2 w-full">
-        <label class="hidden md:block text-xs sm:text-sm font-medium mb-2">Tu Usuario:</label>
+        <label class="hidden md:block text-[11px] font-medium mb-1">Tu Usuario:</label>
         <input type="text" id="input-usuario" value="Invitado" 
-               class="w-full max-w-[120px] sm:max-w-[150px] md:max-w-none bg-gray-700 border border-gray-600 rounded px-2 py-1 text-xs sm:text-sm text-white focus:outline-none focus:border-emerald-500">
+               class="w-full max-w-[120px] sm:max-w-[140px] md:max-w-none bg-gray-700 border border-gray-600 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-emerald-500">
       </div>
     </div>
     
-    <div class="text-[10px] sm:text-xs text-gray-500 whitespace-nowrap md:mt-2 shrink-0">
+    <div class="text-[9px] sm:text-xs text-gray-500 whitespace-nowrap shrink-0">
       Muestra para Richard v1.0
     </div>
   </div>
