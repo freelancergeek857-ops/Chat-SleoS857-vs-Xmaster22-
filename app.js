@@ -1,6 +1,6 @@
 // Configuración de tu cliente Supabase
 const SUPABASE_URL = "https://arpmtbhiynrsffapebyw.supabase.co";
-const SUPABASE_KEY = sb_publishable_9IFETTvqOGXF11G0YNdCog_mgjkav6Z";
+const SUPABASE_KEY = "sb_publishable_9IFETTvqOGXF11G0YNdCog_mgjkav6Z";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const ventanaChat = document.getElementById('ventana-chat');
