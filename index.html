@@ -11,6 +11,7 @@
 
   <div class="flex w-full h-full p-4 gap-4">
     
+    <!-- Panel Lateral Configuración -->
     <div class="w-1/4 bg-gray-800 rounded-lg p-4 flex flex-col justify-between shadow-lg">
       <div>
         <h2 class="text-xl font-bold mb-4 text-emerald-400">Configuración</h2>
@@ -24,10 +25,12 @@
       </div>
     </div>
 
+    <!-- Panel del Chat -->
     <div class="w-3/4 bg-gray-800 rounded-lg flex flex-col shadow-lg overflow-hidden">
       
       <div id="ventana-chat" class="flex-1 p-4 overflow-y-auto space-y-3 flex flex-col">
-        </div>
+        <!-- Los mensajes se cargan acá -->
+      </div>
 
       <form id="form-chat" class="p-4 bg-gray-750 border-t border-gray-700 flex gap-2">
         <input type="text" id="input-mensaje" placeholder="Escribí un mensaje... (Usá tus emojis favoritos! 😊)" required autocomplete="off"
@@ -39,6 +42,13 @@
 
     </div>
   </div>
+
+  <!-- Capturador de errores para verlos en el celular mediante alertas -->
+  <script>
+    window.onerror = function(msg, url, line) {
+      alert("Error en el código:\n" + msg + "\nEn línea: " + line);
+    };
+  </script>
 
   <script src="app.js"></script>
 </body>
