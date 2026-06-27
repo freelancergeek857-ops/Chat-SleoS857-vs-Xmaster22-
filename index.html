@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Express</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 h-screen flex">
+
+  <div class="flex w-full h-full p-4 gap-4">
+    
+    <div class="w-1/4 bg-gray-800 rounded-lg p-4 flex flex-col justify-between shadow-lg">
+      <div>
+        <h2 class="text-xl font-bold mb-4 text-emerald-400">Configuración</h2>
+        <label class="block text-sm font-medium mb-2">Tu Nombre de Usuario:</label>
+        <input type="text" id="input-usuario" value="Invitado" 
+               class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+        <p class="text-xs text-gray-400 mt-2">Podés cambiarlo en cualquier momento.</p>
+      </div>
+      <div class="text-xs text-gray-500">
+        Muestra para Richard v1.0
+      </div>
+    </div>
+
+    <div class="w-3/4 bg-gray-800 rounded-lg flex flex-col shadow-lg overflow-hidden">
+      
+      <div id="ventana-chat" class="flex-1 p-4 overflow-y-auto space-y-3 flex flex-col">
+        </div>
+
+      <form id="form-chat" class="p-4 bg-gray-750 border-t border-gray-700 flex gap-2">
+        <input type="text" id="input-mensaje" placeholder="Escribí un mensaje... (Usá tus emojis favoritos! 😊)" required autocomplete="off"
+               class="flex-1 bg-gray-700 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-emerald-500">
+        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-2 rounded transition-colors">
+          Enviar
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
