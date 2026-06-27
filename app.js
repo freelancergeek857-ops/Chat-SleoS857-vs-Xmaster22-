@@ -1,7 +1,9 @@
 // Configuración de tu cliente Supabase
 const SUPABASE_URL = "https://arpmtbhiynrsffapebyw.supabase.co";
 const SUPABASE_KEY = "sb_publishable_9IFETTvqOGXF11G0YNdCog_mgjkav6Z";
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Inicialización usando el objeto window explícito para navegadores
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const ventanaChat = document.getElementById('ventana-chat');
 const formChat = document.getElementById('form-chat');
@@ -13,12 +15,17 @@ async function cargarHistorial() {
     const { data, error } = await supabase
         .from('mensajes')
         .select('*')
-        .order('created_at', { ascending: true }); // Del más viejo al más nuevo
+        .order('created_at', { ascending: true });
 
-    if (error) return console.error('Error cargando historial:', error);
+    if (error) {
+        console.error('Error cargando historial:', error);
+        return;
+    }
     
-    data.forEach(msg => renderizarMensaje(msg));
-    hacerScrollAbajo();
+    if (data) {
+        data.forEach(msg => renderizarMensaje(msg));
+        hacerScrollAbajo();
+    }
 }
 
 // 2. Renderizar un mensaje en la pantalla con el formato requerido
@@ -39,7 +46,7 @@ function renderizarMensaje(msg) {
     ventanaChat.appendChild(div);
 }
 
-// 3. Enviar un nuevo mensaje a la DB
+// 3. Enviar un nuevo mensaje a la DB con control de errores
 formChat.addEventListener('submit', async (e) => {
     e.preventDefault();
     const mensaje = inputMensaje.value.trim();
@@ -51,12 +58,15 @@ formChat.addEventListener('submit', async (e) => {
         .from('mensajes')
         .insert([{ usuario: usuario, contenido: mensaje }]);
 
-    if (error) console.error('Error al enviar:', error);
-    
-    inputMensaje.value = ''; // Limpiar input
+    if (error) {
+        alert("Error de Supabase al enviar: " + error.message);
+        console.error('Error al enviar:', error);
+    } else {
+        inputMensaje.value = ''; // Limpiar input solo si se envió con éxito
+    }
 });
 
-// 4. ESCUCHAR EN TIEMPO REAL (Magia de Supabase)
+// 4. ESCUCHAR EN TIEMPO REAL (Uso correcto de 'schema')
 supabase
     .channel('cambios-chat')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'mensajes' }, payload => {
@@ -70,5 +80,5 @@ function hacerScrollAbajo() {
     ventanaChat.scrollTop = ventanaChat.scrollHeight;
 }
 
-// Inicializar
+// Inicializar el chat
 cargarHistorial();
