@@ -2,8 +2,9 @@
 const SUPABASE_URL = "https://arpmtbhiynrsffapebyw.supabase.co";
 const SUPABASE_KEY = "sb_publishable_9IFETTvqOGXF11G0YNdCog_mgjkav6Z";
 
-// Inicialización usando el objeto window explícito para navegadores
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// Inicialización corregida para evitar colisiones en el navegador
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = supabaseClient;
 
 const ventanaChat = document.getElementById('ventana-chat');
 const formChat = document.getElementById('form-chat');
