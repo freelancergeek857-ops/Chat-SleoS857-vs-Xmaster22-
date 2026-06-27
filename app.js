@@ -28,18 +28,21 @@ async function cargarHistorial() {
     }
 }
 
-// 2. Renderizar un mensaje en la pantalla con el formato requerido
+// 2. Renderizar un mensaje en la pantalla con el formato requerido (Hora y Fecha)
 function renderizarMensaje(msg) {
     const div = document.createElement('div');
     
-    // Formatear la hora local del mensaje
-    const hora = new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // Crear el formato de fecha y hora (Ejemplo: 26/06, 23:35)
+    const fechaObj = new Date(msg.created_at);
+    const fechaCorta = fechaObj.toLocaleDateString([], { day: '2-digit', month: '2-digit' });
+    const horaCorta = fechaObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const tiempoTexto = `${fechaCorta} - ${horaCorta}`;
 
     div.className = "bg-gray-700 p-3 rounded-lg max-w-xl self-start shadow-md break-words";
     div.innerHTML = `
         <div class="flex items-baseline gap-2 mb-1">
             <span class="font-bold text-emerald-400 text-sm">${msg.usuario}</span>
-            <span class="text-[10px] text-gray-400">${hora}</span>
+            <span class="text-[10px] text-gray-400">${tiempoTexto}</span>
         </div>
         <p class="text-gray-200 text-sm">${msg.contenido}</p>
     `;
