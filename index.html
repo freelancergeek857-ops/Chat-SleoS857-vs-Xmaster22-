@@ -7,17 +7,19 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    /* Forzar el contenedor base a la altura exacta visible del dispositivo */
-    body {
-      height: 100vh;
-      height: 100dvh;
+    /* Permite el gesto de recarga nativa pero mantiene la app fija */
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100vh;
+      height: 100dvh;
       overflow: hidden;
-      position: fixed;
       width: 100%;
+      overscroll-behavior-y: contain; /* Evita el rebote elástico feo, pero deja recargar */
+      touch-action: pan-y; 
     }
   </style>
+  
 </head>
 <body class="bg-gray-900 text-gray-100 p-2 flex flex-col md:flex-row gap-2 select-none box-border">
 
